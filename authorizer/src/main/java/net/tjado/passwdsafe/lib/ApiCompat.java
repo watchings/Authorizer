@@ -39,6 +39,7 @@ public final class ApiCompat
     private static final int SDK_P = 28;
     public static final int SDK_Q = 29;
     private static final int SDK_TIRAMISU = 33;
+    public static final int SDK_UPSIDE_DOWN_CAKE = 34;
 
     public static final int SDK_VERSION = Build.VERSION.SDK_INT;
 
@@ -250,6 +251,26 @@ public final class ApiCompat
     {
         return (SDK_VERSION < SDK_M) ?
                 0 : ApiCompatM.PENDING_INTENT_FLAG_IMMUTABLE;
+    }
+
+    /**
+     * Register a broadcast receiver with proper export flags for Android 34+
+     * @param context The context to register the receiver with
+     * @param receiver The receiver to register
+     * @param filter The intent filter
+     * @param exported Whether the receiver should be exported (accessible to other apps)
+     */
+    public static void registerReceiver(Context context,
+                                        android.content.BroadcastReceiver receiver,
+                                        android.content.IntentFilter filter,
+                                        boolean exported)
+    {
+        if (SDK_VERSION >= SDK_UPSIDE_DOWN_CAKE) {
+            int flags = exported ? Context.RECEIVER_EXPORTED : Context.RECEIVER_NOT_EXPORTED;
+            context.registerReceiver(receiver, filter, null, null, flags);
+        } else {
+            context.registerReceiver(receiver, filter);
+        }
     }
 
     /**

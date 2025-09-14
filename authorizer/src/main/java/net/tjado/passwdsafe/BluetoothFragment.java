@@ -304,7 +304,7 @@ public class BluetoothFragment extends Fragment
         final IntentFilter btStatusIntentFilter = new IntentFilter();
         btStatusIntentFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
         btStatusIntentFilter.addAction(BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED);
-        requireContext().registerReceiver(btStateReceiver, btStatusIntentFilter);
+        ApiCompat.registerReceiver(requireContext(), btStateReceiver, btStatusIntentFilter, false);
 
         registerScanReceiver();
 
@@ -365,7 +365,7 @@ public class BluetoothFragment extends Fragment
         intentFilter.addAction(BluetoothDevice.ACTION_FOUND);
         intentFilter.addAction(BluetoothDevice.ACTION_NAME_CHANGED);
         intentFilter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
-        requireContext().registerReceiver(btScanReceiver, intentFilter);
+        ApiCompat.registerReceiver(requireContext(), btScanReceiver, intentFilter, false);
     }
 
     private void unregisterScanReceiver() {
@@ -798,7 +798,7 @@ public class BluetoothFragment extends Fragment
                     btAppSettings.setVisibility(View.GONE);
 
                     IntentFilter btStatusIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
-                    requireContext().registerReceiver(btStateReceiver, btStatusIntentFilter);
+                    ApiCompat.registerReceiver(requireContext(), btStateReceiver, btStatusIntentFilter, false);
                     registerScanReceiver();
                     checkBluetoothState(null);
 

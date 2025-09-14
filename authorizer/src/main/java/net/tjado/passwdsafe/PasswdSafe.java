@@ -630,7 +630,7 @@ public class PasswdSafe extends AppCompatActivity
         }
 
         IntentFilter btStatusIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
-        registerReceiver(btStatusBroadcastReceiver, btStatusIntentFilter);
+        ApiCompat.registerReceiver(this, btStatusBroadcastReceiver, btStatusIntentFilter, false);
 
         checkBluetoothState(null);
     }
