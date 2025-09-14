@@ -1372,6 +1372,8 @@ public class PasswdSafe extends AppCompatActivity
     {
         boolean sensitive = true;
         switch (field) {
+        // Both PASSWORD and OTP_KEY are sensitive fields and require user confirmation before copying.
+        // This is intentional for security reasons.
         case PASSWORD:
         case OTP_KEY: {
             SharedPreferences prefs = Preferences.getSharedPrefs(this);
