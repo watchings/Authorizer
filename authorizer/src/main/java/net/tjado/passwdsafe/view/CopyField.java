@@ -13,6 +13,7 @@ package net.tjado.passwdsafe.view;
 public enum CopyField
 {
     EMAIL,
+    OTP_KEY,
     PASSWORD,
     URL,
     USER_NAME

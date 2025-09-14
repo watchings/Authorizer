@@ -1372,7 +1372,8 @@ public class PasswdSafe extends AppCompatActivity
     {
         boolean sensitive = true;
         switch (field) {
-        case PASSWORD: {
+        case PASSWORD:
+        case OTP_KEY: {
             SharedPreferences prefs = Preferences.getSharedPrefs(this);
             if (Preferences.isCopyPasswordConfirm(prefs)) {
                 break;
@@ -1418,6 +1419,13 @@ public class PasswdSafe extends AppCompatActivity
             }
             case USER_NAME: {
                 return fileData.getUsername(rec);
+            }
+            case OTP_KEY: {
+                String otp = fileData.getOtp(rec);
+                if (!TextUtils.isEmpty(otp)) {
+                    return otp;
+                }
+                break;
             }
             case URL: {
                 String url = fileData.getURL(rec, PasswdFileData.UrlStyle.URL_ONLY);

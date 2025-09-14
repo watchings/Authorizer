@@ -134,6 +134,8 @@ public class PasswdSafeRecordBasicFragment
     private TextView itsGroup;
     private View itsUserRow;
     private TextView itsUser;
+    private View itsOtpKeyRow;
+    private TextView itsOtpKey;
     private View itsPasswordRow;
     private TextView itsPassword;
     private Runnable itsPasswordHideRun;
@@ -223,6 +225,8 @@ public class PasswdSafeRecordBasicFragment
         itsGroup = root.findViewById(R.id.group);
         itsUserRow = root.findViewById(R.id.user_row);
         itsUser = root.findViewById(R.id.user);
+        itsOtpKeyRow = root.findViewById(R.id.otp_key_row);
+        itsOtpKey = root.findViewById(R.id.otp_key);
         itsPasswordRow = root.findViewById(R.id.password_row);
         itsPasswordRow.setOnClickListener(this);
         itsPassword = root.findViewById(R.id.password);
@@ -448,6 +452,7 @@ public class PasswdSafeRecordBasicFragment
 
 
         registerForContextMenu(itsUserRow);
+        registerForContextMenu(itsOtpKeyRow);
         registerForContextMenu(itsPasswordRow);
         updatePasswordShown(PasswordVisibilityChange.INITIAL, 0, false);
 
@@ -553,6 +558,11 @@ public class PasswdSafeRecordBasicFragment
             item.setVisible(itsUrlRow.getVisibility() == View.VISIBLE);
         }
 
+        item = menu.findItem(R.id.menu_copy_otp_key);
+        if (item != null) {
+            item.setVisible(itsOtpKeyRow.getVisibility() == View.VISIBLE);
+        }
+
         item = menu.findItem(R.id.menu_copy_email);
         if (item != null) {
             item.setVisible(itsEmailRow.getVisibility() == View.VISIBLE);
@@ -567,6 +577,9 @@ public class PasswdSafeRecordBasicFragment
         int itemId = item.getItemId();
         if (itemId == R.id.menu_copy_user) {
             copyUser();
+            return true;
+        } else if (itemId == R.id.menu_copy_otp_key) {
+            copyOtpKey();
             return true;
         } else if (itemId == R.id.menu_copy_password) {
             copyPassword();
@@ -595,6 +608,9 @@ public class PasswdSafeRecordBasicFragment
         if (id == R.id.user_row) {
             menu.add(PasswdSafe.CONTEXT_GROUP_RECORD_BASIC, R.id.menu_copy_user,
                      0, R.string.copy_user);
+        } else if (id == R.id.otp_key_row) {
+            menu.add(PasswdSafe.CONTEXT_GROUP_RECORD_BASIC, R.id.menu_copy_otp_key,
+                     0, R.string.copy_otp_key);
         } else if (id == R.id.password_row) {
             menu.add(PasswdSafe.CONTEXT_GROUP_RECORD_BASIC,
                      R.id.menu_copy_password, 0, R.string.copy_password);
@@ -614,6 +630,9 @@ public class PasswdSafeRecordBasicFragment
             return true;
         } else if (itemId == R.id.menu_copy_user) {
             copyUser();
+            return true;
+        } else if (itemId == R.id.menu_copy_otp_key) {
+            copyOtpKey();
             return true;
         }
         return super.onContextItemSelected(item);
@@ -734,6 +753,7 @@ public class PasswdSafeRecordBasicFragment
         itsTitle = info.itsFileData.getTitle(info.itsRec);
         setFieldText(itsGroup, itsGroupRow, info.itsFileData.getGroup(info.itsRec));
         setFieldText(itsUser, itsUserRow, info.itsFileData.getUsername(info.itsRec));
+        setFieldText(itsOtpKey, itsOtpKeyRow, info.itsFileData.getOtp(info.itsRec));
 
 
         itsIsPasswordShown = false;
@@ -1599,6 +1619,14 @@ public class PasswdSafeRecordBasicFragment
     private void copyEmail()
     {
         getListener().copyField(CopyField.EMAIL, getLocation().getRecord());
+    }
+
+    /**
+     * Copy the OTP key to the clipboard
+     */
+    private void copyOtpKey()
+    {
+        getListener().copyField(CopyField.OTP_KEY, getLocation().getRecord());
     }
 
     /**
