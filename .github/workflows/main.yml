@@ -5,6 +5,7 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  workflow_dispatch:
 
 
 jobs:
@@ -32,7 +33,7 @@ jobs:
     - name: Build Debug APK
       run: ./gradlew assembleDebug
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: Authorizer-Debug
         path: authorizer/build/outputs/apk/debug/authorizer-debug.apk
