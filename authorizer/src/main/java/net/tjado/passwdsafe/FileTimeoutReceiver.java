@@ -55,7 +55,7 @@ public class FileTimeoutReceiver extends BroadcastReceiver
         IntentFilter filter =
                 new IntentFilter(PasswdSafeApp.FILE_TIMEOUT_INTENT);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
-        itsActivity.registerReceiver(this, filter);
+        ApiCompat.registerReceiver(itsActivity, this, filter, false);
 
         SharedPreferences prefs = Preferences.getSharedPrefs(itsActivity);
         prefs.registerOnSharedPreferenceChangeListener(this);

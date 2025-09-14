@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.ServiceInfo;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
@@ -103,7 +104,7 @@ public class BluetoothForegroundService extends Service {
         // A service needs to manage its own lifecycle - if Bluetooth gets deactivated the service
         // needs to terminate itself. It can't be done by the activity as it might be not running.
         IntentFilter btStatusIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
-        registerReceiver(btStatusBroadcastReceiver, btStatusIntentFilter);
+        ApiCompat.registerReceiver(this, btStatusBroadcastReceiver, btStatusIntentFilter, false);
 
         PasswdSafeUtil.dbginfo(TAG,"Executing onStartCommand - " + intent);
         createNotificationChannel();
@@ -165,7 +166,8 @@ public class BluetoothForegroundService extends Service {
                 .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
                 .setOngoing(true);
 
-        startForeground(MAIN_NOTIFICATION_ID, serviceNotificationBuilder.build());
+        ApiCompat.startForeground(this, MAIN_NOTIFICATION_ID, serviceNotificationBuilder.build(), 
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE);
     }
 
     private void endBroadcast() {

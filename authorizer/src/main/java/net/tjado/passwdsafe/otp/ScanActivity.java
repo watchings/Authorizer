@@ -28,6 +28,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+
+import net.tjado.passwdsafe.lib.ApiCompat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -134,7 +136,7 @@ public class ScanActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         receiver = new ScanBroadcastReceiver();
-        this.registerReceiver(receiver, new IntentFilter(ScanBroadcastReceiver.ACTION));
+        ApiCompat.registerReceiver(this, receiver, new IntentFilter(ScanBroadcastReceiver.ACTION), false);
         setContentView(R.layout.activity_otp_scan);
         CameraView cameraView = findViewById(R.id.camera_view);
 
