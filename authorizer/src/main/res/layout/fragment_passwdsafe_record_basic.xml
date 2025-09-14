@@ -66,6 +66,19 @@
 
         </LinearLayout>
 
+        <LinearLayout android:id="@+id/otp_key_row"
+                      style="@style/RecordRow">
+
+            <TextView style="@style/RecordHeader"
+                      android:text="@string/otp_key_header" />
+
+            <View style="@style/Separator"/>
+
+            <TextView android:id="@+id/otp_key"
+                      style="@style/RecordField.Large"/>
+
+        </LinearLayout>
+
         <LinearLayout android:id="@+id/password_row"
                       style="@style/RecordRow"
                       android:clickable="true">

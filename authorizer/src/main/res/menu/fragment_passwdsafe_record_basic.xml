@@ -11,6 +11,9 @@
     <item android:id="@+id/menu_copy_user"
           android:title="@string/copy_user"/>
 
+    <item android:id="@+id/menu_copy_otp_key"
+          android:title="@string/copy_otp_key"/>
+
     <item android:id="@+id/menu_copy_password"
           android:title="@string/copy_password"/>
 

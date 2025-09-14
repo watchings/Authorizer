@@ -53,6 +53,7 @@
     <string name="copy_clipboard">Copy to Clipboard</string>
     <string name="copy_email">Copy Email</string>
     <string name="copy_notes">Copy Notes</string>
+    <string name="copy_otp_key">Copy OTP Key</string>
     <string name="copy_password">Copy Password</string>
     <string name="copy_password_warning">
         Warning: All apps can read the clipboard contents, and the clipboard
@@ -781,6 +782,7 @@
     <string name="error_permission_camera_open">No permission to open the camera!</string>
     <string name="error_camera_open">Error while opening camera!</string>
     <string name="otp_header">OTP</string>
+    <string name="otp_key_header">OTP KEY</string>
     <string name="otp_overwrite">Replace the current OTP? It will be lost forever!</string>
     <string name="replace">Replace</string>
     <string name="secret">Secret</string>
