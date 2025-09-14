@@ -8,6 +8,7 @@
 package net.tjado.passwdsafe.lib;
 
 import android.app.NotificationManager;
+import android.app.Service;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ContentResolver;
@@ -270,6 +271,25 @@ public final class ApiCompat
             context.registerReceiver(receiver, filter, null, null, flags);
         } else {
             context.registerReceiver(receiver, filter);
+        }
+    }
+
+    /**
+     * Start foreground service with proper service type for Android 34+
+     * @param service The service to start as foreground
+     * @param id The notification ID
+     * @param notification The notification to show
+     * @param serviceType The foreground service type (only used on Android 34+)
+     */
+    public static void startForeground(Service service,
+                                       int id,
+                                       android.app.Notification notification,
+                                       int serviceType)
+    {
+        if (SDK_VERSION >= SDK_UPSIDE_DOWN_CAKE) {
+            service.startForeground(id, notification, serviceType);
+        } else {
+            service.startForeground(id, notification);
         }
     }
 

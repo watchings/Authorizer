@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.ServiceInfo;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
@@ -165,7 +166,8 @@ public class BluetoothForegroundService extends Service {
                 .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
                 .setOngoing(true);
 
-        startForeground(MAIN_NOTIFICATION_ID, serviceNotificationBuilder.build());
+        ApiCompat.startForeground(this, MAIN_NOTIFICATION_ID, serviceNotificationBuilder.build(), 
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE);
     }
 
     private void endBroadcast() {
